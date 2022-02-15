@@ -1,24 +1,36 @@
+import com.ascii274.reto.dto.Categoria;
 import com.mongodb.client.*;
 
 import com.mongodb.client.model.Filters;
+import com.mongodb.diagnostics.logging.Loggers;
+import controller.DeveloperController;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-import java.util.Scanner;
+import org.slf4j.LoggerFactory;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static com.mongodb.client.model.Projections.*;
 
+
 public class App {
     public static void main(String[] args) {
-
+//        Logger.getLogger(Loggers.PREFIX).setLevel(Level.SEVERE);
+        Logger mongoLogger = Logger.getLogger( "org.mongodb.driver" );
+        mongoLogger.setLevel(Level.OFF); // e.g. or Log.WARNING, etc.
 
         try{
+            DeveloperController developerController = new DeveloperController();
+            
             MongoClient client = MongoClients.create();
             MongoDatabase database = client.getDatabase("db-developers");
             MongoCollection<Document> developers = database.getCollection("developers");
+
             Options options = new Options();
             options.addOption("disday", "displayDay", false, "Display days" );
             options.addOption("lisdev", "listDevelop", false, "Listing developers" );
@@ -35,7 +47,7 @@ public class App {
             }
 
             if(line.hasOption("addev")){
-                addDeveloper();
+                developerController.insertDeveloper();
             }
 
 
@@ -43,7 +55,6 @@ public class App {
 //            e.printStackTrace();
             System.out.println(e.getMessage());
         }
-
     }
 
     private static void getDays(MongoCollection<Document> developers) {
@@ -66,19 +77,5 @@ public class App {
             }
     }
 
-    public static void addDeveloper(){
-
-        System.out.println("************ Alta developer ******************");
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Introduzca nombre:");
-        String name = scanner.nextLine();
-        System.out.println("Introduzca email:");
-        String email = scanner.nextLine();
-        System.out.println("Introduzca telefono:");
-        String phone = scanner.nextLine();
-        System.out.println("Introduzca fecha: (Ejemplo: Abr 1,2021)");
-        String date = scanner.nextLine();
-
-    }
 
 }
