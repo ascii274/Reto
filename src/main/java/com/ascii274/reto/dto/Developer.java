@@ -1,16 +1,5 @@
 package com.ascii274.reto.dto;
 
-import com.ascii274.reto.dto.Categoria;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-@Getter
-@Setter
-@AllArgsConstructor
-@ToString
-
 public class Developer {
     private String nombre;
     private String correo;
@@ -18,4 +7,22 @@ public class Developer {
     private String telefono;
     private String fecha;
 
+    public Developer(String nombre, String correo, Categoria categoria, String telefono, String fecha) {
+        this.nombre = nombre;
+        this.correo = correo;
+        this.categoria = categoria;
+        this.telefono = telefono;
+        this.fecha = fecha;
+    }
+
+    @Override
+    public String toString() {
+        return "Developer [" +
+                "nombre='" + nombre + '\'' +
+                ", correo='" + correo + '\'' +
+                ", categoria=" + categoria +
+                ", telefono='" + telefono + '\'' +
+                ", fecha='" + fecha + '\'' +
+                ']';
+    }
 }

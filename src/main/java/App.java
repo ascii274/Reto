@@ -1,4 +1,5 @@
 import com.ascii274.reto.dto.Categoria;
+import com.ascii274.reto.dto.ConfigLogger;
 import com.mongodb.client.*;
 
 import com.mongodb.client.model.Filters;
@@ -6,23 +7,16 @@ import controller.DeveloperController;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import static com.mongodb.client.model.Projections.*;
 
 
 public class App {
     public static void main(String[] args) {
-        Logger.getLogger("org.mongodb.driver.connection").setLevel(Level.OFF);
-        Logger.getLogger("org.mongodb.driver.management").setLevel(Level.OFF);
-        Logger.getLogger("org.mongodb.driver.cluster").setLevel(Level.OFF);
-        Logger.getLogger("org.mongodb.driver.protocol.insert").setLevel(Level.OFF);
-        Logger.getLogger("org.mongodb.driver.protocol.query").setLevel(Level.OFF);
-        Logger.getLogger("org.mongodb.driver.protocol.update").setLevel(Level.OFF);
+
+        ConfigLogger configLogger = new ConfigLogger();
 
         try{
             DeveloperController developerController = new DeveloperController();
@@ -51,8 +45,7 @@ public class App {
                 developerController.insertDeveloper();
             }
 
-
-        } catch (ParseException e) {
+        } catch (Exception e) {
 //            e.printStackTrace();
             System.out.println(e.getMessage());
         }
