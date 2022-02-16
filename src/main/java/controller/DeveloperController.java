@@ -2,12 +2,15 @@ package controller;
 
 import com.ascii274.reto.dto.Categoria;
 import com.ascii274.reto.dto.Developer;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.client.MongoCollection;
+import org.bson.Document;
 import java.util.Scanner;
 
 public class DeveloperController implements IDeveloperController{
 
     @Override
-    public void insertDeveloper() throws Exception{
+    public Developer createDeveloper() throws Exception{
         Developer developer;
         Categoria categoria;
 
@@ -27,7 +30,25 @@ public class DeveloperController implements IDeveloperController{
 
         categoria = getCategory(categoriaString);
         developer = new Developer(name,email,categoria,phone,date);
-        System.out.println(developer.toString());
+        System.out.println(developer.toString()); //TODO delete JJJ
+        return developer;
+
+    }
+
+    /**
+     * - POJO Developer insert
+     * @param developers
+     * @param developer
+     * @throws Exception
+     */
+    @Override
+    public void insertDeveloper(MongoCollection<Document> developers, Developer developer) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        final Document wrapper = new Document();
+//        Document doc = new Document();
+        String json = mapper.writeValueAsString(developer);
+        wrapper.append("developer",json);
+        developers.insertOne(Document.parse(json));
 
     }
 

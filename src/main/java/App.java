@@ -1,7 +1,6 @@
-import com.ascii274.reto.dto.Categoria;
-import com.ascii274.reto.dto.ConfigLogger;
+import com.ascii274.reto.dto.Developer;
+import com.ascii274.reto.helper.ConfigLogger;
 import com.mongodb.client.*;
-
 import com.mongodb.client.model.Filters;
 import controller.DeveloperController;
 import org.apache.commons.cli.CommandLine;
@@ -9,20 +8,18 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-
 import static com.mongodb.client.model.Projections.*;
 
 
 public class App {
+
     public static void main(String[] args) {
 
-        ConfigLogger configLogger = new ConfigLogger();
-
+        DeveloperController developerController = new DeveloperController();
+        //ConfigLogger configLogger = new ConfigLogger(); // review JJJ
         try{
-            DeveloperController developerController = new DeveloperController();
             
             MongoClient client = MongoClients.create();
-
             MongoDatabase database = client.getDatabase("db-developers");
             MongoCollection<Document> developers = database.getCollection("developers");
 
@@ -42,7 +39,9 @@ public class App {
             }
 
             if(line.hasOption("addev")){
-                developerController.insertDeveloper();
+                developerController.insertDeveloper(developers,developerController.createDeveloper());
+                listDevelopers(developers);
+
             }
 
         } catch (Exception e) {
