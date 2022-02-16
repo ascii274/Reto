@@ -1,17 +1,18 @@
 ### MongoDb: 
 >localhost:27017
 
-# Ejecutar jar en  terminal:
+# Para ejecutar:
 
-### Comando que lista dia
-> java -jar RetoMWC_2022.jar com.ascii274.reto -disday
-> 
->### Comando lista developer
-- Ejecutar en Terminal:
- > java -jar RetoMWC_2022.jar com.ascii274.reto -lisdev
+1. Crear archivo jar.
+2. Desde el directorio generado aplicar los siguientes commandos:
 
->### añade developer
-- Ejecutar en Terminal:
-> java -jar RetoMWC_2022.jar com.ascii274.reto -addev
+### Comando que lista día
+- java -jar RetoMWC_2022.jar com.ascii274.reto -disday
+ 
+### Comando lista developer
+- java -jar RetoMWC_2022.jar com.ascii274.reto -lisdev
+
+### Comando añade developer
+- java -jar RetoMWC_2022.jar com.ascii274.reto -addev
  
 
