@@ -1,7 +1,7 @@
 ## Versión functional en el siguiente enlace:
 https://github.com/ascii274/NuweChallenge/tree/develop/RetoMWC-2022
 
-> Este ejercicio se presentó sin terminar por falta de iempo.
+> Este ejercicio se presentó sin terminar por falta de tiempo.
 
 
 ### MongoDb: 
